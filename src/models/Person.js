@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid'
 
-let db = [{"id":"d03e55fe-89a5-4aa2-96f8-c20790ee015c","name":"TEST_NAME","age":20,"hobbies":["TEST_HOBBY","Q"]}];
-
+// let db = [{"id":"d03e55fe-89a5-4aa2-96f8-c20790ee015c","name":"TEST_NAME","age":20,"hobbies":["TEST_HOBBY","Q"]}];
+let db = []
 class Person {
     constructor(name, age, hobbies) {
         this.id = uuidv4()
