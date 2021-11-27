@@ -11,7 +11,7 @@ const app = http.createServer((req, res)=> {
     try {
         const urlArr = req.url.split('/')
         if (urlArr.length > 3) {
-            responseCodeMesssage(res, 404, {message: 'Url not found'})
+            responseCodeMesssage(res, 404, {message: 'Requests to non-existing endpoints'})
         }
         const id = urlArr[2]
         const isUuid = uuidValidate(id)
