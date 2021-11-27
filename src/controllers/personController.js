@@ -30,13 +30,14 @@ const createPerson = async (req, res)=> {
     try {
 
         const { name, age, hobbies } = await parseRequestPerson(req)
-        
+ 
         const person = await new Person(name, age, hobbies).pushDB()
 
         responseCodeMesssage(res, 201, person)
 
     } catch (err) {
-        console.log(err)
+        responseCodeMesssage(res, 400, 
+            {message: 'Person must be object and have all properties (name (string), age (number), hobbies (array of string)) '})
     }
 }
 
@@ -49,20 +50,15 @@ const updatePerson = async (req, res, id)=> {
         } else {
 
             const { name, age, hobbies } = await parseRequestPerson(req)
-            
-            const pers= {
-                name: name || person.name,
-                age: age || person.age,
-                hobbies: hobbies || person.hobbies
-            }
 
-            const putPerson = await Person.update(id, pers)
+            const putPerson = await Person.update(id, name, age, hobbies)
             
             responseCodeMesssage(res, 200, putPerson)
         }
 
     } catch (err) {
-        console.log(err)
+        responseCodeMesssage(res, 400, 
+            {message: 'Person must be object and have any properties (name (string), age (number), hobbies (array of string)) '})
     }
 }
 
