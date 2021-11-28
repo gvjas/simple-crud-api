@@ -1,6 +1,5 @@
 import { v4 as uuidv4 } from 'uuid'
-import { responseCodeMesssage } from '../utils.js'
-// let db = [{"id":"d03e55fe-89a5-4aa2-96f8-c20790ee015c","name":"TEST_NAME","age":20,"hobbies":["TEST_HOBBY","Q"]}];
+
 let db = []
 class Person {
     name
@@ -29,7 +28,7 @@ class Person {
 
     
     set hobbiesVal(hobbiesVal) {
-        if (!Array.isArray(hobbiesVal) || hobbiesVal.length !==  hobbiesVal.filter(x => typeof x === 'string').length) {      
+        if (!Array.isArray(hobbiesVal) || hobbiesVal.length !==  hobbiesVal.filter(x => x && typeof x === 'string').length) {      
             throw new Error()
         }
         this.hobbies = hobbiesVal
@@ -52,9 +51,9 @@ class Person {
     static async update(id, name, age, hobbies) {
 
         const person = db.find((per) => per.id === id)
-        person.nameValue = name || person.name
-        person.ageValue = age || person.age
-        person.hobbiesVal = hobbies || person.hobbies
+        person.nameValue = typeof name === 'undefined' ? person.name : name
+        person.ageValue = typeof age === 'undefined' ? person.age : age
+        person.hobbiesVal = typeof hobbies === 'undefined' ? person.hobbies : hobbies
         return person
     }
     

@@ -3,6 +3,7 @@
 const responseCodeMesssage = (res, code, message) => {
     res.writeHead(code, {'Content-Type': 'application/json'})
     res.end(JSON.stringify(message))
+    
 }
 
 const parseRequestPerson = async (req)=> {
@@ -13,7 +14,7 @@ const parseRequestPerson = async (req)=> {
         }
         return JSON.parse(Buffer.concat(buffers).toString())
     } catch (err) {
-        console.log(err)
+        throw new Error()
     }
 }
 
