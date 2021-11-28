@@ -1,7 +1,7 @@
 import request from "supertest";
 import app from "../app.js";
 
-describe('test for /person and person/{personId}', () => {
+describe('tests for requests on the /person and person/{personId}', () => {
 
         let id = '';
 
@@ -46,7 +46,6 @@ describe('test for /person and person/{personId}', () => {
         test("It should response the DEL id method", async () => {
             await request(app)
                 .del(`/person/${id}`)
-                .expect('Content-Type', /json/)
                 .expect(204)
         });
 
@@ -55,6 +54,6 @@ describe('test for /person and person/{personId}', () => {
                 .get(`/person/${id}`)
                 .expect('Content-Type', /json/)
                 .expect(404)
-                .expect({"message":"Person id not found"})
+                .expect({"Bad request":"Person id not found"})
         });
   });

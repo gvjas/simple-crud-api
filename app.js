@@ -11,7 +11,7 @@ const app = http.createServer((req, res)=> {
     try {
         const urlArr = req.url.split('/')
         if (urlArr.length > 3) {
-            responseCodeMesssage(res, 404, {message: 'Requests to non-existing endpoints'})
+            responseCodeMesssage(res, 404, {"Bad request": 'Request to non-existing endpoint'})
         }
         const id = urlArr[2]
         const isUuid = uuidValidate(id)
@@ -34,12 +34,12 @@ const app = http.createServer((req, res)=> {
                     break
             }
         } else if (urlArr[1] === 'person' && !isUuid) {
-            responseCodeMesssage(res, 400, {message: 'Person id not valid'})
+            responseCodeMesssage(res, 400, {"Bad request": 'Person id not valid'})
         } else {
-            responseCodeMesssage(res, 404, {message: 'Url not found'})
+            responseCodeMesssage(res, 404, {"Bad request": 'Url not found'})
         }
     } catch (error) {
-        responseCodeMesssage(res, 500, {message: 'Server error'})
+        responseCodeMesssage(res, 500, {"Error": 'Server error'})
     }
 })
 

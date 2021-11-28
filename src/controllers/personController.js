@@ -9,7 +9,7 @@ const getPersons = async (req, res) => {
         const person = await Person.getAll()
         responseCodeMesssage(res, 200, person)
     } catch (err) {
-        console.log(err)
+        responseCodeMesssage(res, 500, {"Error": 'Server Error'})
     }
 }
 
@@ -18,10 +18,10 @@ const getPersonById = async (req, res, id)=> {
     try {
         const person = await Person.getById(id)
         person ? responseCodeMesssage(res, 200, person) 
-                : responseCodeMesssage(res, 404, {message: 'Person id not found'})
+                : responseCodeMesssage(res, 404, {"Bad request": 'Person id not found'})
 
     } catch (err) {
-        console.log(err)
+        responseCodeMesssage(res, 500, {"Error": 'Server Error'})
     }
 }
 
@@ -37,7 +37,7 @@ const createPerson = async (req, res)=> {
 
     } catch (err) {
         responseCodeMesssage(res, 400, 
-            {message: 'Person must be object and have all properties (name (string), age (number), hobbies (array of string)) '})
+            {"Bad request": 'Person must be object and have all properties (name (string), age (number), hobbies (array of string)) '})
     }
 }
 
@@ -46,7 +46,7 @@ const updatePerson = async (req, res, id)=> {
     try {
         const person = await Person.getById(id)
         if (!person) {
-            responseCodeMesssage(res, 404, {message: 'Person id not found'})
+            responseCodeMesssage(res, 404, {"Bad request": 'Person id not found'})
         } else {
 
             const { name, age, hobbies } = await parseRequestPerson(req)
@@ -58,7 +58,7 @@ const updatePerson = async (req, res, id)=> {
 
     } catch (err) {
         responseCodeMesssage(res, 400, 
-            {message: 'Person must be object and have any properties (name (string), age (number), hobbies (array of string)) '})
+            {"Bad request": 'Person must be object and have any properties (name (string), age (number), hobbies (array of string)) '})
     }
 }
 
@@ -68,15 +68,15 @@ const deletePerson = async (req, res, id)=> {
         const person = await Person.getById(id)
         
         if (!person) {
-            responseCodeMesssage(res, 404, {message: 'Person id not found'})
+            responseCodeMesssage(res, 404, {"Bad request": 'Person id not found'})
         } else {
             await Person.del(id)
-            res.writeHead(204, {'Content-Type': 'application/json'})
+            res.writeHead(204)
             res.end()
         }
 
     } catch (err) {
-        console.log(err)
+        responseCodeMesssage(res, 500, {"Error": 'Server Error'})
     }
 }
 
