@@ -1,0 +1,26 @@
+{
+    "name": "simple-crud-api",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "type": "module",
+    "scripts": {
+        "start:dev": "nodemon server.js",
+        "start:prod": "webpack --mode production && node ./dist/index_bundle.js",
+        "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "jest": "^27.3.1",
+        "nodemon": "^2.0.15",
+        "supertest": "^6.1.6",
+        "webpack": "^5.64.4",
+        "webpack-cli": "^4.9.1"
+    },
+    "dependencies": {
+        "dotenv": "^10.0.0",
+        "uuid": "^8.3.2"
+    }
+}
